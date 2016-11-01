@@ -1,0 +1,24 @@
+
+
+server {
+
+        server_name localhost;
+
+        listen 80;
+        listen  [::]:80 default ipv6only=on;
+        location / {
+                root /var/www/tehusu/fe;
+                index index.html;
+        }
+        location /api {
+            include proxy_params;
+        	proxy_pass http://unix:/var/www/tehusu/run/gunicorn.sock;
+        }
+        location /ws {
+            root /var/www/tehusu/ws;
+            proxy_pass http://127.0.0.1:9090;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+        }
+}
