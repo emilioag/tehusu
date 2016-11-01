@@ -29,18 +29,18 @@ class WebSocketHandler(websocket.WebSocketHandler):
 def send_message_to_clients():
     try:
         for client in clients:
-            # dht11 = DHT11(REDIS_INSTANCE)
+            dht11 = DHT11(REDIS_INSTANCE)
 
-            # dht11.get()
-            # response = {
-            #     "Temperature": dht11.Temperature,
-            #     "Humidity": dht11.Humidity
-            # }
-
+            dht11.get()
             response = {
-                "Temperature": 1,
-                "Humidity": 2
+                "Temperature": dht11.Temperature,
+                "Humidity": dht11.Humidity
             }
+
+            # response = {
+            #     "Temperature": 1,
+            #     "Humidity": 2
+            # }
 
             client.write_message(response)
     finally:
