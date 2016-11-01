@@ -9,3 +9,4 @@ be/tehusu/__pycache__
 be/tehusu/migrations
 ws/models/__pycache__/*
 fe/node_modules
+.ipynb_checkpoints
