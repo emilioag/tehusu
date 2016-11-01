@@ -8,6 +8,7 @@ from django_redis import get_redis_connection
 from pymongo import MongoClient
 import datetime
 import time
+from djserver.tehusu.utils import buildChart
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -32,7 +33,10 @@ class Dth11(APIView):
     renderer_classes = (JSONRenderer, )
 
     def get(self, request, format=None):
-        return Response({'message': 'lala'})
+        client = MongoClient()
+        db = client['test']
+        col = db.test_collection
+        return Response(buildChart(col.find()))
 
     def post(self, request, format=None):
         data = request.data
