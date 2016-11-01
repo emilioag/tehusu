@@ -7,5 +7,5 @@ class DHT11:
         self.Humidity = 0
 
     def get(self):
-        self.Temperature = int(self.redis.get("Temperature"))
-        self.Humidity = int(self.redis.get("Humidity"))
+        self.Temperature = int(self.redis.get("temperature"))
+        self.Humidity = int(self.redis.get("humidity"))
