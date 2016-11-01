@@ -7,6 +7,7 @@ from djserver.tehusu.serializers import UserSerializer, GroupSerializer
 from django_redis import get_redis_connection
 from pymongo import MongoClient
 import datetime
+import time
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -43,8 +44,10 @@ class Dth11(APIView):
         humidity = data['humidity']
         instant = data['instant']
 
+        last_update = con.get('last_update')
+        last_update = time.time() if last_update is None else last_update
+        last_update = float(last_update)
 
-        last_update = float(con.get('last_update'))
         instant = float(instant)
 
         if (instant - last_update) > 60:
