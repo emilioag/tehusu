@@ -45,7 +45,10 @@ class Dth11(APIView):
         instant = data['instant']
 
         last_update = con.get('last_update')
-        last_update = time.time() if last_update is None else last_update
+
+        if last_update is None:
+            con.set('last_update', instant)
+
         last_update = float(last_update)
 
         instant = float(instant)
