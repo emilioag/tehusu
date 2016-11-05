@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 # from rest_framework import routers
 from djserver.tehusu import views
+from rest_framework_jwt.views import obtain_jwt_token
 
 # router = routers.DefaultRouter()
 # router.register(r'users', views.UserViewSet)
@@ -27,6 +28,7 @@ from djserver.tehusu import views
 urlpatterns = [
     # url(r'^', include(router.urls)),
     url(r'^api/admin/', admin.site.urls),
-    url(r'^api/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # url(r'^api/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api/login/', obtain_jwt_token),
     url(r'^api/dth11', views.Dth11.as_view())
 ]

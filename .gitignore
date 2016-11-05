@@ -11,3 +11,4 @@ ws/models/__pycache__/*
 fe/node_modules
 .ipynb_checkpoints
 installNode6.txt
+be/djserver/tehusu/__pycache__/*
