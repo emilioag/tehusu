@@ -9,6 +9,7 @@ from pymongo import MongoClient
 import datetime
 import time
 from djserver.tehusu.utils import buildChart
+from djserver.tehusu.models import get_measures
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -33,10 +34,7 @@ class Dth11(APIView):
     renderer_classes = (JSONRenderer, )
 
     def get(self, request, format=None):
-        client = MongoClient()
-        db = client['test']
-        col = db.test_collection
-        return Response(buildChart(col.find()))
+        return Response(buildChart(get_measures('hour')))
 
     def post(self, request, format=None):
         data = request.data
@@ -59,12 +57,13 @@ class Dth11(APIView):
 
         if (instant - last_update) > 60:
             con.set('last_update', instant)
-            db.test_collection.insert({
-                '_id': datetime.datetime.fromtimestamp(instant).strftime('%d-%m-%Y %H:%M'),
+            date = datetime.datetime.fromtimestamp(instant)
+            db.iot.insert({
+                '_id': datetime.datetime(
+                    date.year, date.month, date.day, date.hour, date.minute),
                 'temperature': temperature,
                 'humidity': humidity
             })
-
 
         con.set('temperature', temperature)
         con.set('humidity', humidity)
