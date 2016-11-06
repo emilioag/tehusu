@@ -34,7 +34,7 @@ class Dth11(APIView):
     renderer_classes = (JSONRenderer, )
 
     def get(self, request, format=None):
-        return Response(buildChart(get_measures('hour')))
+        return Response(buildChart(get_measures()))
 
     def post(self, request, format=None):
         data = request.data
