@@ -11,7 +11,7 @@ def as_string(event_name):
     }
 
 
-def get_measures(granularity='hour'):
+def get_measures(date_start, date_end, granularity='hour'):
     client = MongoClient()
     db = client['test']
     granularities = {
@@ -29,6 +29,14 @@ def get_measures(granularity='hour'):
         'year': {'$concat': ['$year']},
     }
     return db.iot.aggregate([
+        {
+            '$match': {
+                '_id': {
+                    '$gte': date_start,
+                    '$lte': date_end
+                }
+            }
+        },
         {
             '$project': {
                 'temperature': '$temperature',

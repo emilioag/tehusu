@@ -34,7 +34,13 @@ class Dth11(APIView):
     renderer_classes = (JSONRenderer, )
 
     def get(self, request, format=None):
-        return Response(buildChart(get_measures()))
+        date_start = datetime.datetime.fromtimestamp(
+            int(request.GET['dateStart']))
+        date_end = datetime.datetime.fromtimestamp(
+            int(request.GET['dateEnd']))
+        granularity = request.GET['granularity']
+        return Response(
+            buildChart(get_measures(date_start, date_end, granularity)))
 
     def post(self, request, format=None):
         data = request.data
