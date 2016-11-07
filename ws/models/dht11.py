@@ -1,4 +1,4 @@
-import time
+
 
 class DHT11:
     def __init__(self, redis):
@@ -7,5 +7,5 @@ class DHT11:
         self.Humidity = 0
 
     def get(self):
-        self.Temperature = int(self.redis.get("temperature"))
-        self.Humidity = int(self.redis.get("humidity"))
+        self.Temperature = round(float(self.redis.get("temperature")), 2)
+        self.Humidity = round(float(self.redis.get("humidity")), 2)
