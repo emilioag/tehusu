@@ -61,11 +61,11 @@ class Dth11(APIView):
             db.iot.insert({
                 '_id': datetime.datetime(
                     date.year, date.month, date.day, date.hour, date.minute),
-                'temperature': temperature,
-                'humidity': humidity
+                'temperature': float(temperature),
+                'humidity': float(humidity)
             })
 
-        con.set('temperature', temperature)
-        con.set('humidity', humidity)
+        con.set('temperature', float(temperature))
+        con.set('humidity', float(humidity))
 
         return Response({'message': 'lelele'}, status=status.HTTP_201_CREATED)
