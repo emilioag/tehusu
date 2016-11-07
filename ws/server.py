@@ -3,7 +3,7 @@ from models.dht11 import DHT11
 from tornado import websocket, web, ioloop
 from datetime import timedelta
 
-REDIS_INSTANCE = redis.Redis()
+REDIS_INSTANCE = redis.Redis(host='127.0.0.1', port=6379)
 clients = []
 
 
