@@ -12,3 +12,5 @@ fe/node_modules
 .ipynb_checkpoints
 installNode6.txt
 be/djserver/tehusu/__pycache__/*
+frontend/configs.jsx
+frontend/src/configs.jsx
